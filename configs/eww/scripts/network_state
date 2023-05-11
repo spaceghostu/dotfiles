@@ -1,0 +1,30 @@
+#!/bin/bash/zsh
+
+WLAN='wlan0'
+ETH='enp4s0'
+
+# Get current network stats
+RX=$(cat /proc/net/dev | grep $ETH | awk '{print $2}')
+TX=$(cat /proc/net/dev | grep $ETH | awk '{print $10}')
+TIME=$(date +%s)
+
+# Get previous network stats from file
+if [ -f ~/.network-stats ]; then
+    PREV_RX=$(cat ~/.network-stats | awk '{print $1}')
+    PREV_TX=$(cat ~/.network-stats | awk '{print $2}')
+    PREV_TIME=$(cat ~/.network-stats | awk '{print $3}')
+else
+    PREV_RX=$RX
+    PREV_TX=$TX
+    PREV_TIME=$TIME
+fi
+
+# Save current network stats to file
+echo "$RX $TX $TIME" > ~/.network-stats
+
+SPEED_RX=$(( ($RX - $PREV_RX) / ($TIME - $PREV_TIME) * 8 / 1000 ))
+SPEED_TX=$(( ($TX - $PREV_TX) / ($TIME - $PREV_TIME) * 8 / 1000 ))
+
+
+# Display network speeds in eww format
+echo "{\"up\": \"$SPEED_RX\", \"down\": \"$SPEED_TX\", \"fg-color\":\"#FFFFFF\", \"bg-color\":\"#000000\"}"

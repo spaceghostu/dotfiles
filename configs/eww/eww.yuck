@@ -3,6 +3,7 @@
 (include "widgets/datetime/datetime.yuck")
 (include "widgets/calendar/calendar.yuck")
 (include "widgets/spotify/spotify.yuck")
+(include "widgets/system/system.yuck")
 
 (defwidget players []
   (box :orientation "h" :space-evenly false :spacing 0
@@ -11,6 +12,10 @@
 (defwidget leftside []
   (box :class "leftside" :orientation "h" :space-evenly false :halign "start"
     (players)))
+(defwidget rightside []
+  (box :class "rightside" :orientation "h" :space-evenly false :halign "end"
+    (system)
+    (datetime :monitor 0 )))
 
 (defwindow bar0
   :monitor 0
@@ -26,7 +31,7 @@
     :vexpand false
     (leftside)
     (workspaces :monitor 0 )
-    (datetime :monitor 0 )))
+    (rightside )))
 
 (defwindow bar1
   :monitor 1
@@ -42,5 +47,5 @@
     :vexpand false
     (leftside)
     (workspaces :monitor 1 )
-    (datetime :monitor 1 )))
+    (rightside )))
 

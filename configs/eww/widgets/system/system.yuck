@@ -1,0 +1,22 @@
+
+
+(defpoll network_state :interval "1s" :initial '{"label": " .. MB/s   .. MB/s", "fg-color":"#FFFFFF", "bg-color":"#000000"}'
+"sh ./scripts/network_state")
+(defpoll CPU_USAGE :interval "1s" `sh ./scripts/sys_info --cpu`)
+(defpoll MEM_USAGE :interval "1s" `sh ./scripts/sys_info --mem`)
+; (defpoll BLIGHT :interval "1s" `sh ./scripts/sys_info --blight`)
+(defpoll BATTERY :interval "5s" `sh ./scripts/sys_info --bat`)
+; (defpoll BATTERY_STATUS :interval "5s" `sh ./scripts/sys_info --bat-status`)
+
+(defwidget scale_and_graph [value class visible ?max]
+  (box :class class :orientation "v" :space-evenly "false" :visible {visible}
+    (graph :class "graph" :line-style "miter" :width 50 :dynamic true :value value :thickness 2 :vexpand "true" :time-range "30s")))
+
+(defwidget system []
+  (box :class "system" :vexpand "false" :hexpand "false"
+    (box :orientation "h" :spacing 10 :halign "stretch"
+      (scale_and_graph :class "network_up_graph" :value {network_state.up} :visible true :max 10000)
+      (scale_and_graph :class "network_down_graph" :value {network_state.down} :visible true :max 10000)
+      (scale_and_graph :max 100 :class "cpu_graph" :value CPU_USAGE :visible true)
+      (scale_and_graph :max 100 :class "mem_graph" :value MEM_USAGE :visible true)
+      (scale_and_graph :max 100 :class "bat_graph" :value BATTERY :visible {BATTERY < 90}))))
