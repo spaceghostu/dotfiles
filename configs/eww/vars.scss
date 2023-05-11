@@ -1,0 +1,63 @@
+$nord0: #2e3440;
+$nord1: #3b4252;
+$nord2: #434c5e;
+$nord3: #4c566a;
+$nord4: #d8dee9;
+$nord5: #e5e9f0;
+$nord6: #eceff4;
+$nord7: #8fbcbb;
+$nord8: #88c0d0;
+$nord9: #81a1c1;
+$nord10: #5e81ac;
+$nord11: #bf616a;
+$nord12: #d08770;
+$nord13: #ebcb8b;
+$nord14: #a3be8c;
+$nord15: #b48ead;
+
+
+
+
+$base00: #2b2c2e;
+$base01: #343536;
+$base02: #4e4e4e;
+$base03: #565758;
+$base04: #b0b4bc;
+
+$shade00: #2b2c2e;
+$shade01: #1f1f20;
+$shade02: #1c1d1f;
+$shade03: #060809;
+
+$white: #f9f9f9;
+
+$primary: #d2d8d9;
+$primary-dark: #2a7fac;
+$primary-dark-contrast: #c9ddec;
+
+$accent-contrast: rgba(0, 0, 0, 0.8);
+$accent: #ece3a8;
+
+$fg: rgba(202, 222, 236, 0.9);
+$fg-dim: rgba(202, 222, 236, 0.2);
+$bg: $nord0;
+$bg-lighter-contrast: #e3e8ed;
+$bg-darker: #557272;
+$bg-darkest: #243131;
+$bg-lighter: #7c8a8f;
+
+$focused-bg: #acbfcc;
+$focused-fg: #203f58;
+$focused-fg-lighter: #647f94;
+
+$visible-bg: #6f8391;
+$visible-fg: #203f58;
+
+$urgent-bg: #b23a51;
+$urgent-fg: $fg;
+
+$busy-bg: $bg;
+$busy-fg: $fg;
+
+$empty-bg: $bg;
+$empty-fg: $fg-dim;

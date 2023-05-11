@@ -1,0 +1,33 @@
+@import '../../vars.scss';
+
+.cal-box {
+  background-color: $bg;
+  font-family: Comic Mono;
+  font-size: 1em;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+calendar:selected {
+  color: $bg;
+  background-color: #8fe6e6;
+  border-radius: 5px;
+}
+
+calendar.header {
+  color: #8fe6e6;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: $focused-bg;
+}
+
+calendar.highlight {
+  color: $focused-bg;
+  font-weight: bold;
+}
+
+calendar:indeterminate {
+  color: $base00;
+}

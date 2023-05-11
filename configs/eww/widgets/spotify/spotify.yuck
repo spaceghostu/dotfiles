@@ -1,0 +1,40 @@
+
+(include "widgets/util/revealer.yuck")
+(include "widgets/util/playerctl.yuck")
+
+(defvar revealSpotify false)
+
+(deflisten spotify_state_artist
+  "playerctl -p spotify --follow metadata --format '{{ trunc(artist, 40) }}' || true" )
+
+(deflisten spotify_state_title
+  :initial ""
+  :onchange "eww -c ~/repos/dotfiles/configs/eww update revealSpotify=true && sleep 5 && eww -c ~/repos/dotfiles/configs/eww update revealSpotify=false"
+  "playerctl -p spotify --follow metadata --format '{{ trunc(title, 40) }}' || true" )
+
+(deflisten spotify_state_position
+  :initial ""
+  "playerctl -p spotify --follow metadata --format '{{ duration(position) }}' || true" )
+
+(deflisten spotify_state_playing "playerctl -p spotify --follow status || true")
+
+
+
+(defwidget spotify [?class]
+  (box :space-evenly false
+    :class "playerctl spotify hover-module ${class}"
+    (revealer-on-rightclick :class "hl-on-hover"
+      :var revealSpotify
+      :varname "revealSpotify"
+      :transition "slideleft"
+      
+      (hovered-sign :var revealSpotify
+        (label :class "" :text "")
+        (label :class "playerctl-text" :text ""))
+      (eventbox :onclick "playerctl -p spotify play-pause"
+        (label :class "playerctl-text" :text " ${spotify_state_artist} - ${spotify_state_title} "))
+      
+      
+      (playerctl :name "spotify" :state_playing spotify_state_playing :icon "" :icon_click "wmctrl -a Spotify"))
+  )
+)

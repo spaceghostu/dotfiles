@@ -1,0 +1,9 @@
+#!/bin/bash/zsh
+add_tag() {
+    echo "$1" >> ~/.urgent-tags
+}
+remove_tag() {
+    sed -i "/$1/d" ~/.urgent-tags
+}
+
+remove_tag $1

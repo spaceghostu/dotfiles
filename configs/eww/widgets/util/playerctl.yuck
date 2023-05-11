@@ -1,0 +1,9 @@
+
+(defwidget playerctl [icon name state_playing ?icon_click]
+  (box
+    (eventbox :width 20 :class "playerctl-button" :onclick "${icon_click} || true"
+      (label :text icon))
+    (eventbox :width 20 :class "playerctl-button" :onclick "playerctl -p ${name} play-pause"
+      (label :text "${ state_playing == "Playing" ? "" : "" }"))
+    (eventbox :width 20 :class "playerctl-button" :onclick "playerctl -p ${name} next"
+      (label :text ""))))

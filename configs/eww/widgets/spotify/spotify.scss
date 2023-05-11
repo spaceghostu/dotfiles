@@ -1,0 +1,36 @@
+
+$green: #68d18c;
+$red: #cf7e6a;
+
+
+.players {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.playerctl.spotify {
+}
+
+.playerctl {
+  background: $green;
+}
+
+.playerctl-text {
+  color: $bg;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.playerctl-button {
+  color: $nord4;
+  border: none;
+
+}
+.playerctl-button {
+  color: $nord0;
+}
+
+.playerctl-button:hover {
+  background: rgba(202, 222, 236, 0.5);
+  color: $nord0;
+}
+
+

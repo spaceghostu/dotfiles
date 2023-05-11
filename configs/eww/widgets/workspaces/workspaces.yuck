@@ -1,0 +1,37 @@
+
+
+(defpoll notifytags_classes :interval "1s" 'scripts/notifytags_classes')
+
+(deflisten wmstate
+  :initial '{"workspaces":[{"layout":"","tags":[{"name":"","index":0,"mine":false,"busy":false,"visible":false,"urgent":false}]}]}'
+"leftwm state")
+
+(defwidget workspaces [monitor]
+  (eventbox :class "workspaces ${notifytags_classes}"
+    :orientation "h"
+    :space-evenly true
+    :halign "start"
+    :spacing 10
+    :onscroll "sh ./scripts/workspacescroll {}"
+    (box
+      (for tag in '${wmstate.workspaces[0].tags}'
+        (eventbox
+          :class " \
+          ws-button \
+          visible-${tag.visible} \
+          busy-${tag.busy} \
+          focused-${tag.focused} \
+          tag-${tag.name} \
+          "
+          :onhover "sh ./scripts/ontaghover ${tag.name}"
+          :onclick "sh ./scripts/ontagclick ${monitor} ${tag.index} ${tag.name}"
+          :onrightclick "sh ./scripts/ontagclick -r ${monitor} ${tag.index} ${tag.name}"
+          {tag.name == "term" ? "" :
+          tag.name == "web" ? "" :
+          tag.name == "dev" ? "" :
+          tag.name == "code" ? "" :
+          tag.name == "chat" ? "" :
+          tag.name == "files" ? (tag.focused ? "" : "") :
+          tag.name == "admin" ? (tag.focused ? "" : "") :
+          tag.name == "sys" ? "" :
+        tag.name == "vid" ? "" : "${tag.name}"})))))

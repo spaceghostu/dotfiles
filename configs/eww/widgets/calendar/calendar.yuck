@@ -1,0 +1,35 @@
+
+(defpoll calendar_day :interval "10h"
+"date '+%d'")
+(defpoll calendar_month :interval "10h"
+"scripts/calendar")
+(defpoll calendar_year :interval "10h"
+"date '+%Y'")
+
+(defwidget cal []
+  (box :class "cal-box"
+    :orientation "v"
+    (box :class "cal-inner-box"
+      (calendar :class "cal"
+        :day calendar_day
+        :month calendar_month
+      :year calendar_year))))
+
+(defwindow calendar0
+  :monitor 0
+  :geometry (geometry :x "84%"
+    :y "40px"
+    :width "270px"
+  :height "60px")
+  (cal))
+
+(defwindow calendar1
+  :monitor 1
+  :geometry (geometry :x "84%"
+    :y "40px"
+    :width "270px"
+  :height "60px")
+  (cal))
+
+
+

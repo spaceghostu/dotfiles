@@ -1,0 +1,35 @@
+
+@import '../../vars.scss';
+
+.workspaces * {
+  font-size: 14px;
+  padding-left: 6px;
+  padding-right: 6px;
+  font-family: "Font Awesome 6 Free";
+  font-size: 14px;
+}
+
+.ws-button {
+  color: $empty-fg;
+}
+.ws-button.busy-true {
+  color: $busy-fg;
+  background-color: $busy-bg;
+}
+.ws-button.focused-true {
+  color: $focused-fg;
+  background-color: $focused-bg;
+  border-bottom: 3px solid $white;
+}
+.ws-button.visible-true {
+  color: $visible-fg;
+  background-color: $visible-bg;
+}
+.ws-button.urgent-true {
+  color: $urgent-fg;
+  background-color: $urgent-bg;
+}
+.ws-button:hover {
+  color: $white;
+  background-color: $bg-darker;
+}

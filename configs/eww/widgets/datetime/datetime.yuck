@@ -1,0 +1,21 @@
+(defpoll date :interval "10s"
+"date '+%a %d %b'")
+(defpoll time :interval "10s"
+"date '+%H:%M'")
+
+
+(defwidget time []
+  (box :class "time" {time}))
+
+(defwidget date [monitor]
+  (box :class "date"
+    (eventbox
+      :onclick "scripts/popup calendar ${monitor}"
+      :onrightclick "google-chrome-stable --profile-directory=\"Profile 1\" --new-window https://calendar.google.com/"
+    {date})))
+
+
+(defwidget datetime [monitor]
+  (box :class "datetime" :orientation "h" :space-evenly false :halign "end"
+    (time)
+    (date :monitor monitor)))

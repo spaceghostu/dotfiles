@@ -1,0 +1,6 @@
+#!/bin/bash/zsh
+
+case "$1" in
+ up) leftwm-command "FocusNextTag" ;;
+ down) leftwm-command "FocusPreviousTag" ;;
+esac
