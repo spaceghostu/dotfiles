@@ -30,7 +30,7 @@ $HOME/.local/bin/launcher
 elif [ "$1" = "wifi" ]; then
 kitty -e nmtui
 elif [ "$1" = "audio" ]; then
-pavucontrol
+leftwm-command "ToggleScratchPad PavuControl"
 elif [ "$1" = "calendar" ]; then
 calendar $2
 fi

@@ -1,0 +1,18 @@
+
+.layout {
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color:  #7f9e9b;
+  color: rgba(0, 0, 0, 0.8);
+}
+.layout-text {
+  color: $bg;
+}
+.layout-button {
+  color: $bg;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.layout button:hover {
+  background-color: rgba(202, 222, 236, 0.5);
+}

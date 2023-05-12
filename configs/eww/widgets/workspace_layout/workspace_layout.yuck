@@ -1,0 +1,40 @@
+(include "widgets/util/revealer.yuck")
+
+(defvar revealLayout false)
+(deflisten l-ws-layout-1 'leftwm-state -w 1 -s "{{workspace.layout}}"')
+
+(deflisten l-ws-layout-0 'leftwm-state -w 0 -s "{{workspace.layout}}"')
+
+(defwidget ws-layout-1 [?class]
+  (box :space-evenly false
+    :class "layout hover-module ${class}"
+    (revealer-on-rightclick :class "hl-on-hover"
+      :var revealLayout
+      :varname "revealLayout"
+      :transition "slideleft"
+      :class "layout-text"
+      
+      (hovered-sign :var revealLayout
+        (label :class "layout-text" :text "")
+        (label :class "layout-text" :text ""))
+      (eventbox :onscroll "sh ./scripts/layoutscroll {}" :onclick "leftwm-command \"SetLayout MainAndVertStack\""
+      {l-ws-layout-1})
+      
+      (label :class "layout-button" :name "layout" :text ""))))
+
+(defwidget ws-layout-0 [?class]
+  (box :space-evenly false
+    :class "layout hover-module ${class}"
+    (revealer-on-rightclick :class "hl-on-hover"
+      :var revealLayout
+      :varname "revealLayout"
+      :transition "slideleft"
+      :class "layout-text"
+      
+      (hovered-sign :var revealLayout
+        (label :class "layout-text" :text "")
+        (label :class "layout-text" :text ""))
+      (eventbox :onscroll "sh ./scripts/layoutscroll {}" :onclick "leftwm-command \"SetLayout MainAndVertStack\""
+      {l-ws-layout-0})
+      
+      (label :class "layout-button" :name "layout" :text ""))))

@@ -4,6 +4,9 @@
 (include "widgets/calendar/calendar.yuck")
 (include "widgets/spotify/spotify.yuck")
 (include "widgets/system/system.yuck")
+(include "widgets/workspace_layout/workspace_layout.yuck")
+(include "widgets/wifi/wifi.yuck")
+(include "widgets/volume/volume.yuck")
 
 (defwidget players []
   (box :orientation "h" :space-evenly false :spacing 0
@@ -11,9 +14,13 @@
 
 (defwidget leftside []
   (box :class "leftside" :orientation "h" :space-evenly false :halign "start"
-    (players)))
+    (children)
+    (players)
+    (volume)
+  ))
 (defwidget rightside []
   (box :class "rightside" :orientation "h" :space-evenly false :halign "end"
+    (wifi)
     (system)
     (datetime :monitor 0 )))
 
@@ -29,7 +36,8 @@
   (centerbox :orientation "h"
     :space-evenly false
     :vexpand false
-    (leftside)
+    (leftside
+      (ws-layout-0))
     (workspaces :monitor 0 )
     (rightside )))
 
@@ -45,7 +53,8 @@
   (centerbox :orientation "h"
     :space-evenly false
     :vexpand false
-    (leftside)
+    (leftside
+      (ws-layout-1))
     (workspaces :monitor 1 )
     (rightside )))
 

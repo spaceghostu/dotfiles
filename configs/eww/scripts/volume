@@ -1,0 +1,6 @@
+#!/bin/bash/zsh
+
+case "$1" in
+ up) pactl set-sink-volume @DEFAULT_SINK@ +1dB;;
+ down) pactl set-sink-volume @DEFAULT_SINK@ -1dB ;;
+esac
