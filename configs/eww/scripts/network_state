@@ -4,8 +4,8 @@ WLAN='wlan0'
 ETH='enp4s0'
 
 # Get current network stats
-RX=$(cat /proc/net/dev | grep $ETH | awk '{print $2}')
-TX=$(cat /proc/net/dev | grep $ETH | awk '{print $10}')
+RX=$(cat /proc/net/dev | grep $WLAN | awk '{print $2}')
+TX=$(cat /proc/net/dev | grep $WLAN | awk '{print $10}')
 TIME=$(date +%s)
 
 # Get previous network stats from file

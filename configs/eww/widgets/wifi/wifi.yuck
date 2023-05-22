@@ -4,7 +4,10 @@
 
 (defwidget wifi []
   (box
+    :class "wifi"
     :orientation "v"
     :tooltip wifi-name
-    (eventbox		:onclick "scripts/popup wifi"
-    :class "wifi-icon" wifi-icon)))
+    (eventbox
+      :onclick "scripts/popup wifi"
+      :class "wifi-icon"
+    wifi-icon)))

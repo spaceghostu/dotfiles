@@ -18,11 +18,11 @@
     (players)
     (volume)
   ))
-(defwidget rightside []
+(defwidget rightside [monitor]
   (box :class "rightside" :orientation "h" :space-evenly false :halign "end"
     (wifi)
     (system)
-    (datetime :monitor 0 )))
+    (datetime :monitor monitor )))
 
 (defwindow bar0
   :monitor 0
@@ -39,7 +39,7 @@
     (leftside
       (ws-layout-0))
     (workspaces :monitor 0 )
-    (rightside )))
+    (rightside :monitor 0 )))
 
 (defwindow bar1
   :monitor 1
@@ -56,5 +56,5 @@
     (leftside
       (ws-layout-1))
     (workspaces :monitor 1 )
-    (rightside )))
+    (rightside :monitor 1 )))
 

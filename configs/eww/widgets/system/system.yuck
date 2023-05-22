@@ -17,6 +17,6 @@
     (box :orientation "h" :spacing 10 :halign "stretch"
       (scale_and_graph :class "network_up_graph" :value {network_state.up} :visible true :max 10000)
       (scale_and_graph :class "network_down_graph" :value {network_state.down} :visible true :max 10000)
-      (scale_and_graph :max 100 :class "cpu_graph" :value CPU_USAGE :visible true)
-      (scale_and_graph :max 100 :class "mem_graph" :value MEM_USAGE :visible true)
+      (scale_and_graph :max 100 :class "cpu_graph warn-${CPU_USAGE > 50} warn-bad-${CPU_USAGE > 75}" :value CPU_USAGE :visible true)
+      (scale_and_graph :max 100 :class "mem_graph warn-${MEM_USAGE > 50} warn-${MEM_USAGE > 75}" :value MEM_USAGE :visible true)
       (scale_and_graph :max 100 :class "bat_graph" :value BATTERY :visible {BATTERY < 90}))))

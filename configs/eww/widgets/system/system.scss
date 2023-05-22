@@ -81,3 +81,31 @@ $network-down-color: #8bd182;
 .network_down_graph .bar scale trough highlight {
 	background-color: $network-down-color;
 }
+
+.warn-true {
+	background-color: rgba(226, 106, 70, 0.4);
+}
+
+.warn-bad-true {
+	animation: pulse 500ms ease-in-out infinite;
+}
+
+
+
+@keyframes pulse {
+  0% {
+    background-color: rgba(226, 106, 70, 0.1);
+  }
+  25% {
+    background-color: rgba(226, 106, 70, 0.7);
+  }
+  50% {
+    color: rgba(226, 106, 70, 1);
+  }
+  75% {
+		background-color: rgba(226, 106, 70, 0.7);
+  }
+  100% {
+	background-color: rgba(226, 106, 70, 0.1);
+  }
+}

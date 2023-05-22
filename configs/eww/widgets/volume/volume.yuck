@@ -8,8 +8,10 @@
       :spacing "2"
       (eventbox
         :onclick "pactl set-sink-volume @DEFAULT_SINK@ 30%"
-        :onrightclick "scripts/popup audio"
+        :onrightclick "pactl set-sink-volume @DEFAULT_SINK@ 100%"
+        :onmiddleclick "scripts/popup audio"
         :onscroll "sh ./scripts/volume {}"
+        :cursor ""
         :class "volume-icon"
       {current-volume})
     )))
