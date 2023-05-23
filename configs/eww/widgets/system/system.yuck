@@ -6,17 +6,31 @@
 (defpoll MEM_USAGE :interval "1s" `sh ./scripts/sys_info --mem`)
 ; (defpoll BLIGHT :interval "1s" `sh ./scripts/sys_info --blight`)
 (defpoll BATTERY :interval "5s" `sh ./scripts/sys_info --bat`)
+(defpoll SPACE_ROOT :interval "5s" `sh ./scripts/sys_info --space-root`)
+(defpoll SPACE_HOME :interval "5s" `sh ./scripts/sys_info --space-home`)
 ; (defpoll BATTERY_STATUS :interval "5s" `sh ./scripts/sys_info --bat-status`)
 
-(defwidget scale_and_graph [value class visible ?max]
+(defwidget scale_and_graph [value class visible ?max ?width]
   (box :class class :orientation "v" :space-evenly "false" :visible {visible}
-    (graph :class "graph" :line-style "miter" :width 50 :dynamic true :value value :thickness 2 :vexpand "true" :time-range "30s")))
+    (graph :class "graph" :line-style "miter" :width {width ?: 50} :dynamic true :value value :thickness 2 :vexpand true :hexpand false :time-range "30s")))
+
+(defwidget metric [value ?class ?unit]
+  (box :class "metric ${class}" :orientation "h" :space-evenly "false" :halign "center"
+    (label :class "number" :text value :halign "center")
+    (label :class "unit" :text {unit} :halign "center" :visible {unit})))
+
+
+(defwidget metrics []
+  (box
+    (metric :value SPACE_ROOT :class "space_root" :unit '%')
+    (metric :value SPACE_HOME :class "space_home ":unit '%')))
 
 (defwidget system []
   (box :class "system" :vexpand "false" :hexpand "false"
-    (box :orientation "h" :spacing 10 :halign "stretch"
+    (box :orientation "h" :spacing 10
       (scale_and_graph :class "network_up_graph" :value {network_state.up} :visible true :max 10000)
       (scale_and_graph :class "network_down_graph" :value {network_state.down} :visible true :max 10000)
       (scale_and_graph :max 100 :class "cpu_graph warn-${CPU_USAGE > 50} warn-bad-${CPU_USAGE > 75}" :value CPU_USAGE :visible true)
       (scale_and_graph :max 100 :class "mem_graph warn-${MEM_USAGE > 50} warn-${MEM_USAGE > 75}" :value MEM_USAGE :visible true)
-      (scale_and_graph :max 100 :class "bat_graph" :value BATTERY :visible {BATTERY < 90}))))
+      (scale_and_graph :width 0 :max 100 :class "bat_graph" :value BATTERY :visible {BATTERY < 90})
+      (metrics))))

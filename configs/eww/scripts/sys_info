@@ -71,6 +71,13 @@ get_battery_status() {
 	cat /sys/class/power_supply/${BAT}/status
 }
 
+get_storage_info_root() {
+	df -h | grep nvme0n1p5 | awk '{print $5}' | tail -n 1 | tr -d '%'
+}
+get_storage_info_home() {
+	df -h | grep nvme0n1p6 | awk '{print $5}' | tail -n 1 | tr -d '%'
+}
+
 ## Execute accordingly
 if [[ "$1" == "--cpu" ]]; then
 	get_cpu
@@ -82,4 +89,9 @@ elif [[ "$1" == "--bat" ]]; then
 	get_battery
 elif [[ "$1" == "--bat-status" ]]; then
 	get_battery_status
+elif [[ "$1" == "--space-root" ]]; then
+	get_storage_info_root
+elif [[ "$1" == "--space-home" ]]; then
+	get_storage_info_home
 fi
+
