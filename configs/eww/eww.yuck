@@ -7,6 +7,7 @@
 (include "widgets/workspace_layout/workspace_layout.yuck")
 (include "widgets/wifi/wifi.yuck")
 (include "widgets/volume/volume.yuck")
+(include "widgets/cmds/cmds.yuck")
 
 (defwidget players []
   (box :orientation "h" :space-evenly false :spacing 0
@@ -22,7 +23,8 @@
   (box :class "rightside" :orientation "h" :space-evenly false :halign "end"
     (wifi)
     (system)
-    (datetime :monitor monitor )))
+    (datetime :monitor monitor)
+    (cmds :monitor monitor)))
 
 (defwindow bar0
   :monitor 0

@@ -1,0 +1,75 @@
+(include "widgets/util/revealer.yuck")
+
+(defvar revealShutdown false)
+(defvar revealRestart false)
+
+(defwidget cmds [monitor]
+  (box :class "cmds"
+    (eventbox :class "white-hover cmds-button"
+      :onclick "scripts/popup cmds ${monitor}"
+      (box
+      ""))))
+
+(defwidget protectedcmd [toggle label command name var varname]
+  (revealer-on-rightclick :class "hl-on-hover"
+    :var var
+    :varname varname
+    :transition "slideleft"
+    (hovered-sign :var var)
+    (box :class "protectedcmd ${name}"
+      (eventbox :class "protectedcmd-button white-hover"
+        :onclick command
+      label))
+    (eventbox :class "protectedcmd-toggle ${name}-toggle white-hover" toggle)))
+
+(defwidget protectedsrow []
+  (box :orientation "h" :space-evenly false :halign "end" :valign "start"
+    (protectedcmd
+      :name "shutdown"
+      :command "shutdown now"
+      :var revealSpotify
+      :varname "revealSpotify"
+      :toggle ""
+    :label "shutdown")
+    (protectedcmd
+      :name "restart"
+      :var revealRestart
+      :varname "revealRestart"
+      :command "restart"
+      :toggle ""
+    :label "restart")
+    (box :class "lock"
+      (eventbox :class "white-hover lock-button"
+        :onclick "slock"
+      ""))))
+
+(defwidget command [label command]
+  (box :spacing 10 :class "command" :orientation "v" :space-evenly true :halign "fill" :valign "start"
+    (eventbox :class "command-button"
+      :onclick command
+      (box :halign "start" label))))
+
+(defwidget commands []
+  (box :class "commands" :orientation "v" :space-evenly true :halign "fill" :valign "start" :hexpand true :width "100%"
+    (protectedsrow)
+    (command :label "diconnect wifi" :command "nmcli con down \"$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)\"")))
+
+
+(defwindow commands0
+  :monitor 0
+  :geometry (geometry :x "85%"
+    :y "22px"
+    :width "15%"
+  :height "60px")
+  (commands))
+
+(defwindow commands1
+  :monitor 1
+  :geometry (geometry :x "85%"
+    :y "22px"
+    :width "15%"
+  :height "60px")
+  (commands))
+
+
+

@@ -72,10 +72,10 @@ get_battery_status() {
 }
 
 get_storage_info_root() {
-	df -h | grep nvme0n1p5 | awk '{print $5}' | tail -n 1 | tr -d '%'
+	df -h | grep nvme0n1p6 | awk '{print $5}' | tail -n 1 | tr -d '%'
 }
 get_storage_info_home() {
-	df -h | grep nvme0n1p6 | awk '{print $5}' | tail -n 1 | tr -d '%'
+	df -h | grep nvme0n1p7 | awk '{print $5}' | tail -n 1 | tr -d '%'
 }
 
 ## Execute accordingly

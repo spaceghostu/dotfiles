@@ -1,0 +1,63 @@
+@import '../../vars.scss';
+
+.cmds * {
+  color: $nord6;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.cmds-button {
+  background-color: $nord10;
+}
+
+
+.protectedcmd * {
+  color: $base00;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.protectedcmd-toggle * {
+  color: $base00;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.shutdown {
+  background-color: $nord11;
+}
+
+.shutdown-toggle {
+  background-color: $nord11;
+}
+.restart {
+  background-color: $nord12;
+}
+.lock * {
+  color: $base00;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.lock-button {
+  background-color: $nord10;
+}
+
+.restart-toggle {
+  background-color: $nord12;
+}
+
+.command * {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.command-button:hover {
+  background-color: $nord4;
+  color: $nord0;
+}
+.command-button:active {
+  background-color: $nord8;
+}
+
+.white-hover:hover {
+  background-color: $nord6;
+}
+
