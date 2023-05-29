@@ -13,7 +13,7 @@
 (defwidget scale_and_graph [value class visible ?max ?width ?shownumber]
   (overlay :class class :orientation "v" :space-evenly "false" :visible {visible}
     (graph :class "graph" :line-style "miter" :width {width ?: 50} :dynamic true :value value :thickness 2 :vexpand true :hexpand false :time-range "30s")
-    (box :class "number" :visible {shownumber || false} {value / 1000})))
+    (box :class "graph_number" :visible {shownumber || false} {value / 1000})))
 
 (defwidget metric [value ?class ?unit]
   (box :class "metric ${class}" :orientation "h" :space-evenly "false" :halign "center"
