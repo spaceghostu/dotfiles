@@ -1,11 +1,14 @@
-#!/bin/bash/zsh
+#!/bin/zsh
 
 WLAN='wlan0'
 ETH='enp4s0'
 
+DEVICE_FILE="/home/calvin/.network-device"
+DEVICE=$(cat /home/calvin/.network-device | tr -d '\n[:space:]')
+
 # Get current network stats
-RX=$(cat /proc/net/dev | grep $ETH | awk '{print $2}')
-TX=$(cat /proc/net/dev | grep $ETH | awk '{print $10}')
+RX=$(cat /proc/net/dev | grep $WLAN | awk '{print $2}')
+TX=$(cat /proc/net/dev | grep $WLAN | awk '{print $10}')
 TIME=$(date +%s)
 
 # Get previous network stats from file

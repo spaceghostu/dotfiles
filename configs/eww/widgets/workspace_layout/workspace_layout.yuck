@@ -1,6 +1,7 @@
 (include "widgets/util/revealer.yuck")
 
-(defvar revealLayout false)
+(defvar revealLayout1 false)
+(defvar revealLayout2 false)
 (deflisten l-ws-layout-1 'leftwm-state -w 1 -s "{{workspace.layout}}"')
 
 (deflisten l-ws-layout-0 'leftwm-state -w 0 -s "{{workspace.layout}}"')
@@ -9,12 +10,12 @@
   (box :space-evenly false
     :class "layout hover-module ${class}"
     (revealer-on-rightclick :class "hl-on-hover"
-      :var revealLayout
-      :varname "revealLayout"
+      :var revealLayout1
+      :varname "revealLayout1"
       :transition "slideleft"
       :class "layout-text"
       
-      (hovered-sign :var revealLayout
+      (hovered-sign :var revealLayout1
         (label :class "layout-text" :text "")
         (label :class "layout-text" :text ""))
       (eventbox :onscroll "sh ./scripts/layoutscroll {}" :onclick "leftwm-command \"SetLayout MainAndVertStack\""
@@ -26,12 +27,12 @@
   (box :space-evenly false
     :class "layout hover-module ${class}"
     (revealer-on-rightclick :class "hl-on-hover"
-      :var revealLayout
-      :varname "revealLayout"
+      :var revealLayout2
+      :varname "revealLayout2"
       :transition "slideleft"
       :class "layout-text"
       
-      (hovered-sign :var revealLayout
+      (hovered-sign :var revealLayout2
         (label :class "layout-text" :text "")
         (label :class "layout-text" :text ""))
       (eventbox :onscroll "sh ./scripts/layoutscroll {}" :onclick "leftwm-command \"SetLayout MainAndVertStack\""

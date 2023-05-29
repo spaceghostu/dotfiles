@@ -10,9 +10,10 @@
 (defpoll SPACE_HOME :interval "5s" `sh ./scripts/sys_info --space-home`)
 ; (defpoll BATTERY_STATUS :interval "5s" `sh ./scripts/sys_info --bat-status`)
 
-(defwidget scale_and_graph [value class visible ?max ?width]
-  (box :class class :orientation "v" :space-evenly "false" :visible {visible}
-    (graph :class "graph" :line-style "miter" :width {width ?: 50} :dynamic true :value value :thickness 2 :vexpand true :hexpand false :time-range "30s")))
+(defwidget scale_and_graph [value class visible ?max ?width ?shownumber]
+  (overlay :class class :orientation "v" :space-evenly "false" :visible {visible}
+    (graph :class "graph" :line-style "miter" :width {width ?: 50} :dynamic true :value value :thickness 2 :vexpand true :hexpand false :time-range "30s")
+    (box :class "number" :visible {shownumber || false} {value / 1000})))
 
 (defwidget metric [value ?class ?unit]
   (box :class "metric ${class}" :orientation "h" :space-evenly "false" :halign "center"
@@ -21,16 +22,21 @@
 
 
 (defwidget metrics []
-  (box
+  (box :space-evenly "false" :orientation "h" :halign "center"
     (metric :value SPACE_ROOT :class "space_root" :unit '%')
     (metric :value SPACE_HOME :class "space_home ":unit '%')))
 
 (defwidget system []
   (box :class "system" :vexpand "false" :hexpand "false"
     (box :orientation "h" :spacing 10
-      (scale_and_graph :class "network_up_graph" :value {network_state.up} :visible true :max 10000)
-      (scale_and_graph :class "network_down_graph" :value {network_state.down} :visible true :max 10000)
-      (scale_and_graph :max 100 :class "cpu_graph warn-${CPU_USAGE > 50} warn-bad-${CPU_USAGE > 75}" :value CPU_USAGE :visible true)
-      (scale_and_graph :max 100 :class "mem_graph warn-${MEM_USAGE > 50} warn-${MEM_USAGE > 75}" :value MEM_USAGE :visible true)
-      (scale_and_graph :width 0 :max 100 :class "bat_graph" :value BATTERY :visible {BATTERY < 90})
+      (checkbox :class "checkbox-network-device" :halign "center"
+        :timeout "1s"
+        :onchecked "echo wlan0 > ~/.network-device"
+        :onunchecked "echo enp4s0 > ~/.network-device"
+        (box :class "check-icon" ""))
+      (scale_and_graph :shownumber true :class "network_up_graph" :value {network_state.up} :visible true :max 10000)
+      (scale_and_graph :shownumber true :class "network_down_graph" :value {network_state.down} :visible true :max 10000)
+      (scale_and_graph :shownumber false :max 100 :class "cpu_graph warn-${CPU_USAGE > 50} warn-bad-${CPU_USAGE > 75}" :value CPU_USAGE :visible true)
+      (scale_and_graph :shownumber false :max 100 :class "mem_graph warn-${MEM_USAGE > 50} warn-${MEM_USAGE > 75}" :value MEM_USAGE :visible true)
+      (scale_and_graph :shownumber false :width 0 :max 100 :class "bat_graph" :value BATTERY :visible {BATTERY < 90})
       (metrics))))

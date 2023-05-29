@@ -35,24 +35,28 @@
       :name "restart"
       :var revealRestart
       :varname "revealRestart"
-      :command "restart"
+      :command "reboot"
       :toggle ""
-    :label "restart")
+    :label "reboot")
     (box :class "lock"
       (eventbox :class "white-hover lock-button"
         :onclick "slock"
       ""))))
 
-(defwidget command [label command]
+(defwidget command [label command monitor]
   (box :spacing 10 :class "command" :orientation "v" :space-evenly true :halign "fill" :valign "start"
     (eventbox :class "command-button"
-      :onclick command
+      :onclick "sh scripts/popup cmds ${monitor} && ${command}"
       (box :halign "start" label))))
 
-(defwidget commands []
+(defwidget commands [monitor]
   (box :class "commands" :orientation "v" :space-evenly true :halign "fill" :valign "start" :hexpand true :width "100%"
     (protectedsrow)
-    (command :label "diconnect wifi" :command "nmcli con down \"$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)\"")))
+    (command :monitor monitor :label "start docker.service" :command "kitty sh -c \"sudo systemctl start docker.service\"")
+    (command :monitor monitor :label "slack" :command "slack && sleep 1 && wmctrl -r :ACTIVE: -t 5")
+    (command :monitor monitor :label "code ~/.config" :command "code ~/.config")
+    (command :monitor monitor :label "code ~/repos/dotfiles" :command "code ~/repos/dotfiles")
+    (command :monitor monitor :label "disconnect wifi" :command "nmcli con down \"$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)\"")))
 
 
 (defwindow commands0
@@ -61,7 +65,7 @@
     :y "22px"
     :width "15%"
   :height "60px")
-  (commands))
+  (commands :monitor 0))
 
 (defwindow commands1
   :monitor 1
@@ -69,7 +73,7 @@
     :y "22px"
     :width "15%"
   :height "60px")
-  (commands))
+  (commands :monitor 1))
 
 
 
