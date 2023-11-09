@@ -35,6 +35,6 @@
         (label :class "playerctl-text" :text " ${spotify_state_artist} - ${spotify_state_title} "))
       
       
-      (playerctl :name "spotify" :state_playing spotify_state_playing :icon "" :icon_click "wmctrl -a Spotify"))
+      (playerctl :name "spotify" :state_playing spotify_state_playing :icon "" :icon_click "leftwm-command \"ToggleScratchPad Spotify\""))
   )
 )

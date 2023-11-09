@@ -12,8 +12,8 @@
 
 (defwidget scale_and_graph [value class visible ?max ?width ?shownumber]
   (overlay :class class :orientation "v" :space-evenly "false" :visible {visible}
-    (graph :class "graph" :line-style "miter" :width {width ?: 50} :dynamic true :value value :thickness 2 :vexpand true :hexpand false :time-range "30s")
-    (box :class "graph_number" :visible {shownumber || false} {value / 1000})))
+    (box :class "graph_number" :visible {shownumber || false} {value / 1000})
+    (graph :class "graph" :line-style "miter" :width {width ?: 50} :dynamic true :value value :thickness 2 :vexpand true :hexpand false :time-range "30s")))
 
 (defwidget metric [value ?class ?unit]
   (box :class "metric ${class}" :orientation "h" :space-evenly "false" :halign "center"
@@ -29,11 +29,6 @@
 (defwidget system []
   (box :class "system" :vexpand "false" :hexpand "false"
     (box :orientation "h" :spacing 10
-      (checkbox :class "checkbox-network-device" :halign "center"
-        :timeout "1s"
-        :onchecked "echo wlan0 > ~/.network-device"
-        :onunchecked "echo enp4s0 > ~/.network-device"
-        (box :class "check-icon" ""))
       (scale_and_graph :shownumber true :class "network_up_graph" :value {network_state.up} :visible true :max 10000)
       (scale_and_graph :shownumber true :class "network_down_graph" :value {network_state.down} :visible true :max 10000)
       (scale_and_graph :shownumber false :max 100 :class "cpu_graph warn-${CPU_USAGE > 50} warn-bad-${CPU_USAGE > 75}" :value CPU_USAGE :visible true)

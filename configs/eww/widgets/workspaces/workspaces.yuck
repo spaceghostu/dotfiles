@@ -1,6 +1,6 @@
 
 
-(defpoll notifytags_classes :interval "1s" 'scripts/notifytags_classes')
+(defpoll notifytags_classes :interval "1s" '/home/calvin/repos/dotfiles/configs/eww/scripts/notifytags_classes')
 
 (deflisten wmstate
   :initial '{"workspaces":[{"layout":"","tags":[{"name":"","index":0,"mine":false,"busy":false,"visible":false,"urgent":false}]}]}'

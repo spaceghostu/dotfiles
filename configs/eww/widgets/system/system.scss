@@ -132,19 +132,3 @@ $space-home-color: #d9b7d4;
 	background-color: $space-home-color;
 	color: $base01;
 }
-
-.checkbox-network-device  {
-	color: $nord4;
-}
-.checkbox-network-device:checked  {
-	color: $nord14;
-}
-.checkbox-network-device check  {
-	border: none;
-	background-color: transparent;
-}
-
-.checkbox-network-device * {
-  font-family: "Font Awesome 6 Free";
-  font-size: 11px;
-}

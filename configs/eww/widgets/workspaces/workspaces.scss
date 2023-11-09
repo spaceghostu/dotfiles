@@ -33,3 +33,26 @@
   color: $white;
   background-color: $bg-darker;
 }
+
+.term-notify .tag-term,
+.web-notify .tag-web,
+.dev-notify .tag-dev,
+.code-notify .tag-code,
+.chat-notify .tag-chat,
+.files-notify .tag-files,
+.admin-notify .tag-admin,
+.sys-notify .tag-sys,
+.vid-notify .tag-vid {
+  color: #e2a548;
+}
+.term-notify .focused-true.tag-term,
+.web-notify .focused-true.tag-web,
+.dev-notify .focused-true.tag-dev,
+.code-notify .focused-true.tag-code,
+.chat-notify .focused-true.tag-chat,
+.files-notify .focused-true.tag-files,
+.admin-notify .focused-true.tag-admin,
+.sys-notify .focused-true.tag-sys,
+.vid-notify .focused-true.tag-vid {
+  border-bottom: 2px solid #e2a548;
+}

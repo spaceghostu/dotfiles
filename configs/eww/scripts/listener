@@ -1,0 +1,9 @@
+#!/bin/bash
+
+while IFS= read -r line
+do
+    # Clear the previous line
+    echo -en "\r\033[K"
+    # Display the new line
+    echo -n "$line"
+done < /tmp/my_pipe

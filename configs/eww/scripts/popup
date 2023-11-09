@@ -1,18 +1,19 @@
 #!/bin/bash
 
-calendar(){
-LOCK_FILE="$HOME/.cache/eww-calendar.lock"
+LOCK_FILE="$HOME/.cache/eww-commands.lock"
 EWW_BIN="/home/calvin/repos/eww/target/release/eww"
 EWW_CONFIG="/home/calvin/repos/dotfiles/configs/eww"
 
+calendar(){
+
 run() {
     echo $1
-    ${EWW_BIN} open "calendar$1"
+    ${EWW_BIN} -c ${EWW_CONFIG} open "calendar$1"
 }
 
 # Run eww daemon if not running
 if [[ ! `pidof eww` ]]; then
-    ${EWW_BIN} daemon
+    ${EWW_BIN} -c ${EWW_CONFIG} daemon
     sleep 1
 fi
 
@@ -21,24 +22,22 @@ if [[ ! -f "$LOCK_FILE" ]]; then
     touch "$LOCK_FILE"
     run $1
 else
-    ${EWW_BIN} close "calendar$1"
+    ${EWW_BIN} -c ${EWW_CONFIG} close "calendar$1"
     rm "$LOCK_FILE"
 fi
 }
 
 
 commands(){
-LOCK_FILE="$HOME/.cache/eww-commands.lock"
-EWW_BIN="/home/calvin/repos/eww/target/release/eww"
 
 run() {
     echo $1
-    ${EWW_BIN} -c /home/calvin/repos/dotfiles/configs/eww open "commands$1"
+    ${EWW_BIN} -c ${EWW_CONFIG} open "commands$1"
 }
 
 # Run eww daemon if not running
 if [[ ! `pidof eww` ]]; then
-    ${EWW_BIN} -c /home/calvin/repos/dotfiles/configs/eww daemon
+    ${EWW_BIN} -c ${EWW_CONFIG} daemon
     sleep 1
 fi
 
@@ -47,7 +46,7 @@ if [[ ! -f "$LOCK_FILE" ]]; then
     touch "$LOCK_FILE"
     run $1
 else
-    ${EWW_BIN} -c /home/calvin/repos/dotfiles/configs/eww close "commands$1"
+    ${EWW_BIN} -c ${EWW_CONFIG} close "commands$1"
     rm "$LOCK_FILE"
 fi
 }

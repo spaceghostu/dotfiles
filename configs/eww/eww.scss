@@ -8,3 +8,22 @@
 @import './widgets/volume/volume.scss';
 @import './widgets/cmds/cmds.scss';
 
+
+
+
+
+.checkbox-network-device  {
+	color: $nord4;
+}
+.checkbox-network-device:checked  {
+	color: $nord14;
+}
+.checkbox-network-device check  {
+	border: none;
+	background-color: transparent;
+}
+
+.checkbox-network-device * {
+  font-family: "Font Awesome 6 Free";
+  font-size: 11px;
+}

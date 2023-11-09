@@ -1,2 +1,2 @@
-#!/bin/bash/zsh
+#!/bin/bash
 cat ~/.urgent-tags | tr '\n' ' ' | sed 's/ /-notify /g'

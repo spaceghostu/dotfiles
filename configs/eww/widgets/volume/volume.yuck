@@ -1,20 +1,21 @@
 
 (defwidget volume []
-  (box
-    :class "volume"
-    (box
-      :orientation "h"
-      :space-evenly "false"
-      :spacing "2"
-      (eventbox
-        :onclick "pactl set-sink-volume @DEFAULT_SINK@ 30%"
-        :onrightclick "pactl set-sink-volume @DEFAULT_SINK@ 100%"
-        :onmiddleclick "scripts/popup audio"
-        :onscroll "sh ./scripts/volume {}"
-        :cursor ""
-        :class "volume-icon"
-      {current-volume})
-    )))
+  (box (box
+      :class "volume"
+      (box
+        :orientation "h"
+        :space-evenly "false"
+        :spacing "2"
+        (eventbox
+          :onclick "pactl set-sink-volume @DEFAULT_SINK@ 30%"
+          :onrightclick "pactl set-sink-volume @DEFAULT_SINK@ 100%"
+          :onmiddleclick "scripts/popup audio"
+          :onscroll "sh ./scripts/volume {}"
+          :cursor ""
+          :class "volume-icon"
+        {current-volume})))
+    
+  ))
 (deflisten current-volume
   :initial "null"
 "sh ./scripts/volume_monitor")

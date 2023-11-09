@@ -1,0 +1,7 @@
+
+(deflisten TERM_LISTENER
+"scripts/listener" )
+
+
+(defwidget term_listener []
+  (box :class "time" {TERM_LISTENER}))

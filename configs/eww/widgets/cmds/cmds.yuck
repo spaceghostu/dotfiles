@@ -27,8 +27,8 @@
     (protectedcmd
       :name "shutdown"
       :command "shutdown now"
-      :var revealSpotify
-      :varname "revealSpotify"
+      :var revealShutdown
+      :varname "revealShutdown"
       :toggle ""
     :label "shutdown")
     (protectedcmd
